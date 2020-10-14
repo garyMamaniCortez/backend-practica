@@ -4,7 +4,9 @@
   "description": "practica de backend con node.js, mongodb, swagger y typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ts": "tsc -w",
+    "dev": "nodemon ./build/server.js",
+    "start": "tsc && node ./build/server.js"
   },
   "author": "jhonny gary mamani cortez",
   "license": "ISC",
