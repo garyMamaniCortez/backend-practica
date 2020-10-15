@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SB-RES-33",
+    "description": "esta API realiza un CRUD basico para usuarios",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/garyMamaniCortez/SB-RES-33/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/user/{username}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "obtiene un usuario del sistema",
+        "parameters":[
+          {
+            "name": "username",
+            "in":"path",
+            "required": true,
+            "description": "username de usuario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties":{
+                "login":{
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/addUser": {
+      "post": {
+        "tags": [
+        "Users"
+        ],
+        "description": "crea un nuevo usuario",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "usuario que queremos crear",
+            "schema": {
+              "type": "object",
+              "properties":{
+                "email": {
+                  "type": "string",
+                  "description": "email del usuario",
+                  "example": "gary@gmail.com"
+                },
+                "password":{
+                  "type": "string",
+                  "description": "contraseña del usuario",
+                  "example": "contraseña"
+                },
+                "name":{
+                  "type": "string",
+                  "description": "nombre del usuario",
+                  "example": "nombre"
+                },
+                "username":{
+                  "type": "string",
+                  "description": "username del usuario",
+                  "example": "username"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "type":"string",
+              "example":"ok"
+            }
+          }
+        }
+      }
+    },
+
+    "/setuser/{username}": {
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "type":"string",
+              "example":"ok"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "type": "object",
+              "properties":{
+                "email": {
+                  "type": "string",
+                  "description": "email del usuario",
+                  "example": "gary@gmail.com"
+                },
+                "contraseña":{
+                  "type": "string",
+                  "description": "contraseña del usuario",
+                  "example": "contraseña"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "type":"string",
+              "example":"ok"
+            }
+          }
+        }
+      }
+    }
+  }
+}
