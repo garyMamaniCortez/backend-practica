@@ -58,21 +58,25 @@
               "properties":{
                 "email": {
                   "type": "string",
+                  "required": true,
                   "description": "email del usuario",
                   "example": "gary@gmail.com"
                 },
                 "password":{
                   "type": "string",
+                  "required": true,
                   "description": "contraseña del usuario",
                   "example": "contraseña"
                 },
                 "name":{
                   "type": "string",
+                  "required": true,
                   "description": "nombre del usuario",
                   "example": "nombre"
                 },
                 "username":{
                   "type": "string",
+                  "required": true,
                   "description": "username del usuario",
                   "example": "username"
                 }
@@ -135,11 +139,13 @@
               "properties":{
                 "email": {
                   "type": "string",
+                  "required": true,
                   "description": "email del usuario",
                   "example": "gary@gmail.com"
                 },
                 "contraseña":{
                   "type": "string",
+                  "required": true,
                   "description": "contraseña del usuario",
                   "example": "contraseña"
                 }
