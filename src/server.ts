@@ -1,9 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
-import helmet from 'helmet';
 import mongoose from 'mongoose';
-import compression from 'compression';
-import cors from 'cors';
+import {body, validationResult} from 'express-validator';
+import {Request, Response} from 'express';
 
 import User from './models/User';
 
@@ -33,9 +32,6 @@ class Server{
         this.app.use(morgan('dev'));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:false}));
-        this.app.use(helmet());
-        this.app.use(compression());
-        this.app.use(cors());
     }
 
     routes(){
@@ -44,16 +40,24 @@ class Server{
                 .populate('posts','title');
             res.json(user);
         });
-        this.app.post("/addUser",async(req, res)=>{
+
+        this.app.post("/addUser",[
+        body('email').isEmail()], async(req: Request, res:Response)=>{
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+              return res.status(400).json({ errors: errors.array() });
+            }
             const newUser= new User(req.body);
             await newUser.save(); 
             res.json({data: newUser});
         });
+
         this.app.put("/user/:username", async(req, res)=>{
             const {username}=req.params;
             const user= await User.findOneAndUpdate({username}, req.body,{new:true});
             res.json(user);
         });
+        
         this.app.delete("/user/:username", async(req, res)=>{
             const {username}=req.params;
             await User.findOneAndDelete({username});
